@@ -5,6 +5,9 @@
 
 use serde::{Deserialize, Serialize};
 
+use crate::prisma::*;
+pub mod prisma;
+
 #[derive(Serialize, Deserialize)]
 struct Person {
   name: String,
@@ -18,7 +21,10 @@ fn log_person(person: Person) {
   println!("name: {}, email: {}, age: {}", person.name, person.email, person.age);
 }
 
-fn main() {
+#[tokio::main]
+pub async fn main() {
+  let client = new_client().await.unwrap();
+  
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![log_person])
     .run(tauri::generate_context!())
