@@ -14,12 +14,11 @@ export default function Home() {
       } })
     } catch (error) {
       console.log(error);
-      
     }
   }
 
   return (
-    <div>
+    <div className="flex justify-between gap-px p-5">
       <div>Home</div>
       <button onClick={() => navigate('/notes')}>Go to notes</button>
       <button onClick={handleLogPerson}>Log person</button>
